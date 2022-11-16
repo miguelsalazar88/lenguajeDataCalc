@@ -96,7 +96,7 @@ retornar
 expr
 : <assoc=right>left=expr POW right=expr        #powExpr
 | MINUS expr                                   #unaryMinusExpr
-| NOT expr                                     #notExpr
+| NOT (SPACE)* expr                            #notExpr
 | left=expr op=(MULT|DIV|MOD) right=expr       #multiplicationExpr
 | left=expr op=(PLUS|MINUS) right=expr         #additiveExpr
 | left=expr op=(LTEQ|GTEQ|LT|GT) right=expr    #relationalExpr

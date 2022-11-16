@@ -16,8 +16,8 @@ class CalcVisitor(CalculadoraVisitor):
 
     # Imprimir algo
     def visitImprimir(self, ctx:CalculadoraParser.ImprimirContext):
-        val = self.visit(ctx.expr())
-        print(val)
+        val = str(self.visit(ctx.expr()))
+        print(val.replace('"',''))
 
     def visitWhile_stat(self, ctx:CalculadoraParser.While_statContext):
         condition = self.visit(ctx.expr())
@@ -241,7 +241,13 @@ class CalcVisitor(CalculadoraVisitor):
         val = self.visit(ctx.expr())
         return math.sqrt(val)
         
-            
+    def visitNotExpr(self, ctx:CalculadoraParser.NotExprContext):
+        print('Aca estamos')
+        expression = self.visit(ctx.expr(0))
+        print(f'Normal: {expression}')
+        expression =  not expression
+        print(f'Negada: {expression}')
+        return expression
 
     # Visit a parse tree produced by CalculadoraParser#assignment.
     def visitAssignment(self, ctx:CalculadoraParser.AssignmentContext):
